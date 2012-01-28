@@ -1,5 +1,7 @@
 module FastForward
   class Builder
+    attr_reader :global_options, :inputs, :outputs
+
     def initialize
       @global_options = []
       @inputs         = []
@@ -16,26 +18,14 @@ module FastForward
       @outputs.push Output.new(filename, &block)
     end
 
-    def command
-      cmd = Sh::Cmd.new("ffmpeg") do |c|
-        @inputs.each do |input|
-          input.options.each do |option|
-            c.opt(option.name).arg(option.value)
-          end
-          c.opt("-i").arg(input.filename)
-        end
-
-        @outputs.each do |output|
-          output.options.each do |option|
-            c.opt(option.name).arg(option.value)
-          end
-          c.arg(output.filename)
-        end
-      end
-    end
-
     def to_s
       command.to_s
+    end
+
+    private
+
+    def command
+      Command.new(self)
     end
   end
 end
