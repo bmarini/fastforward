@@ -11,11 +11,11 @@ module FastForward
     end
 
     def input(filename, &block)
-      @inputs.push Input.new(filename, &block)
+      @inputs.push File.new(filename, :input, &block)
     end
 
     def output(filename, &block)
-      @outputs.push Output.new(filename, &block)
+      @outputs.push File.new(filename, :output, &block)
     end
 
     def to_s

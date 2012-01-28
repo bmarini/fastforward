@@ -14,12 +14,18 @@ module FastForward
 
     def add_input(input)
       input.options.each { |option| add_option(option) }
+      input.streams.each { |stream| add_stream_options(stream) }
       @command.opt("-i").arg(input.filename)
     end
 
     def add_output(output)
       output.options.each { |option| add_option(option) }
+      output.streams.each { |stream| add_stream_options(stream) }
       @command.arg(output.filename)
+    end
+
+    def add_stream_options(stream)
+      stream.options.each { |option| add_option(option) }
     end
 
     def add_option(option)
