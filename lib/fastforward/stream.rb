@@ -12,17 +12,8 @@ module FastForward
     end
 
     def method_missing(method, *args, &block)
-      option = Options.find(method)
-      if option && option_allowed?(option)
-        add_stream_option(option.translation, *(args + [@stream_type, @stream_index]) )
-        self
-      else
-        super
-      end
-    end
-
-    def option_allowed?(option)
-      option.allowed?(@file_type, @stream_type, @stream_index != nil)
+      add_stream_option(method, *(args + [@stream_type, @stream_index]) )
+      self
     end
   end
 end

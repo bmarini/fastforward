@@ -13,8 +13,8 @@ module FastForward
 
     def stream_specifier
       stream_type = case @stream_type
-      when :audio then ":a"
-      when :video then ":v"
+      when :a, :audio then ":a"
+      when :v, :video then ":v"
       else
         ""
       end

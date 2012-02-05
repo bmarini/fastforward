@@ -10,7 +10,7 @@ describe FastForward::Builder do
     builder = subject.tap do |ff|
       ff.input "input.avi"
       ff.output "output.avi" do |o|
-        o.stream("video").bitrate("64k")
+        o.stream("video").b("64k")
       end
     end
 
@@ -21,7 +21,7 @@ describe FastForward::Builder do
     builder = subject.tap do |ff|
       ff.input "input.avi"
       ff.output "output.avi" do |o|
-        o.frame_rate(24)
+        o.r(24)
       end
     end
 
@@ -32,10 +32,10 @@ describe FastForward::Builder do
  to 1 fps and the frame rate of the output file to 24 fps" do
     builder = subject.tap do |ff|
       ff.input "input.m2v" do |i|
-        i.frame_rate(1)
+        i.r(1)
       end
       ff.output "output.avi" do |o|
-        o.frame_rate(24)
+        o.r(24)
       end
     end
 
@@ -46,8 +46,8 @@ describe FastForward::Builder do
     builder = subject.tap do |ff|
       ff.input "INPUT"
       ff.output "OUTPUT" do |o|
-        o.stream("video").encoder("libx264").frame_rate(24)
-        o.stream("audio").encoder("copy")
+        o.stream("v").c("libx264").r(24)
+        o.stream("a").c("copy")
       end
     end
 

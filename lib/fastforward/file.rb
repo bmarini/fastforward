@@ -20,18 +20,8 @@ module FastForward
     end
 
     def method_missing(method, *args, &block)
-      option = Options.find(method)
-      if option && option_allowed?(option)
-        add_option(option.translation, *args)
-        self
-      else
-        super
-      end
+      add_option(method, *args)
+      self
     end
-
-    def option_allowed?(option)
-      option.allowed?(@file_type)
-    end
-
   end
 end
