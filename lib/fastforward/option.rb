@@ -1,7 +1,7 @@
 module FastForward
   class Option
     def initialize(name, value)
-      @name, @value, @opts = name, value
+      @name, @value = name, value
     end
 
     def name
